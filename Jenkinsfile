@@ -24,9 +24,10 @@ pipeline {
     stage('Push Docker Image') {
       steps {
         script {
-          docker.withRegistry('', DOCKERHUB_CREDENTIALS)
-          dockerimage.push()
-
+          docker.withRegistry('', 'DOCKERHUB_CREDENTIALS') {
+          dockerimage.push("V$BUILD_NUMBER")
+          dockerimage.push('latest')
+          }
 }
 }
 }
