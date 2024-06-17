@@ -42,8 +42,8 @@ pipeline {
     stage('Deploy docker Container') {
       steps{
         script {
-          sh "docker pull ${env.DOCKERHUB_REPO}:${env.BUILD_ID}"
-          sh "docker run -p 80:80 --name=myapp -d ${env.DOCKERHUB_REPO}:${env.BUILD_ID}"
+          sh "docker pull ${env.DOCKERHUB_REPO}:V${BUILD_NUMBER}"
+          sh "docker run -p 80:80 --name=myapp -d ${env.DOCKERHUB_REPO}:V${BUILD_NUMBER}"
 
 }
 }
