@@ -25,8 +25,9 @@ pipeline {
       steps {
         script {
            docker.withRegistry('', DOCKERHUB_CREDENTIALS) {
-           image.push("V$BUILD_NUMBER")
-           image.push('latest')
+           def image = docker.build("${env.DOCKERHUB_REPO}:${env.BUILD_NUMBER}")
+           image.push()
+           
            }
         }
 }
