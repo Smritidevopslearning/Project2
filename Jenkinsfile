@@ -24,7 +24,7 @@ pipeline {
     stage('Push Docker Image') {
       steps {
         script {
-          docker.withRegistry('', DOCKERHUB_CREDENTIALS) {
+          docker.withRegistry('', 'DOCKERHUB_CREDENTIALS') {
             def image = docker.build("${env.DOCKERHUB_REPO}:${env.BUILD_ID}")
             image.push()
 
