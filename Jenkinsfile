@@ -16,7 +16,7 @@ pipeline {
     stage('Build Docker Image') {
       steps {
         script {
-          dockerimage = docker.build DOCKERHUB_REPO + ":V$BUILD_NUMBER")
+          dockerimage = docker.build DOCKERHUB_REPO + ":V$BUILD_NUMBER"
         }
        }
     }
