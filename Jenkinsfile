@@ -34,12 +34,8 @@ pipeline {
     stage('Push Docker Image') {
       steps {
         script {
-         
-            image.push()
-
-            
-          
-}
+          image.push()
+        }
 }
 }
 
@@ -47,7 +43,7 @@ pipeline {
       steps{
         script {
           sh "docker pull ${env.DOCKERHUB_REPO}:${env.BUILD_ID}"
-          sh "docker run -d --name myapp -p 80:80 ${env.DOCKERHUB_REPO}:${env.BUILD_ID}"
+          sh "docker run -p 80:80 --name=myapp -d ${env.DOCKERHUB_REPO}:${env.BUILD_ID}"
 
 }
 }
