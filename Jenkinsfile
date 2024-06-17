@@ -21,20 +21,13 @@ pipeline {
        }
     }
 
-     stage('Login to Docker Hub') {
-            steps {
-                script {
-                    // Log in to Docker Hub
-                    sh "echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin"
-                }
-            }
-        }
- 
-
     stage('Push Docker Image') {
       steps {
         script {
-          image.push()
+           docker.withRegistry('', DOCKERHUB_CREDENTIALS) {
+           image.push("V$BUILD_NUMBER")
+           image.push('latest')
+           }
         }
 }
 }
