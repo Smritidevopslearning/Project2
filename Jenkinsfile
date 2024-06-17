@@ -20,18 +20,19 @@ pipeline {
         }
        }
     }
-
+    stage('Login to dockerhub') {
+       steps {
+          script {
+             sh "echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin"
+          }
+       }
+    }
     stage('Push Docker Image') {
       steps {
-        script {
-           docker.withRegistry('', DOCKERHUB_CREDENTIALS) {
-           def image = docker.build("${env.DOCKERHUB_REPO}:${env.BUILD_NUMBER}")
            image.push()
            
            }
         }
-}
-}
 
     stage('Deploy docker Container') {
       steps{
