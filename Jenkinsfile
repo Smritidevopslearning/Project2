@@ -34,11 +34,11 @@ pipeline {
     stage('Push Docker Image') {
       steps {
         script {
-          docker.withRegistry('', DOCKERHUB_CREDENTIALS) {
-            image.push("V${env.BUILD_NUMBER}")
+         
+            image.push()
 
             
-          }
+          
 }
 }
 }
