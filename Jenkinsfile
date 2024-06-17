@@ -16,7 +16,7 @@ pipeline {
     stage('Build Docker Image') {
       steps {
         script {
-          dockerimage = docker.build DOCKERHUB_REPO + ":V$BUILD_NUMBER"
+          def image = docker.build DOCKERHUB_REPO + ":V$BUILD_NUMBER"
         }
        }
     }
@@ -25,7 +25,9 @@ pipeline {
       steps {
         script {
           docker.withRegistry('', DOCKERHUB_CREDENTIALS) {
-            dockerimage.push()
+            def image = docker.build("${env.DOCKERHUB_REPO}:${env.BUILD_ID}")
+            image.push()
+
             
           }
 }
