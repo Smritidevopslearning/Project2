@@ -42,7 +42,7 @@ pipeline {
           sh "docker stop ${DOCKER_CONTAINER_NAME} || true"
           sh "docker rm ${DOCKER_CONTAINER_NAME} || true"
           sh "docker pull ${env.DOCKERHUB_REPO}:V${BUILD_NUMBER}"
-          sh "docker run -p 80:80 --name $(DOCKER_CONTAINER_NAME) -d ${env.DOCKERHUB_REPO}:V${BUILD_NUMBER}"
+          sh "docker run -p 80:80 --name ${DOCKER_CONTAINER_NAME} -d ${env.DOCKERHUB_REPO}:V${BUILD_NUMBER}"
 
 }
 }
